@@ -81,12 +81,22 @@ public class Arreglo {
 	Arreglo.intercambia(arreglo, ultimoIndice + 1, limiteSuperior);
 	return ultimoIndice + 1;
     }
-    
+
     public static <T extends Comparable<T>> void imprime(T[ ] arreglo) {
-	for(int i = 0; i < arreglo.length; i++) {
-	    System.out.print(arreglo[i].toString( ) + "  ");
-	}
+	System.out.println(Arreglo.devuelveCadena(arreglo));
 	System.out.println( );
+    }
+    
+    public static <T extends Comparable<T>> String devuelveCadena(T[ ] arreglo) {
+	String resultado = "[ ";
+	
+	for(int i = 0; i < arreglo.length; i++) {
+	    resultado += arreglo[i].toString( ) + "  ";
+	}
+
+	resultado += " ]";
+
+	return resultado;
     }
 
     public static <T extends Comparable<T>> T[ ] mezcla(T[ ] arreglo1, T[ ] arreglo2) {
@@ -98,20 +108,34 @@ public class Arreglo {
 	int iteradorDeArregloResultante = 0;
 
 	if(arreglo1 == null) {
+	    System.out.println("Como el arreglo de la izquierda es null, solamente devolvemos "
+			       + "el arreglo de la derecha.");
 	    return arreglo2;
 	}
 
 	if(arreglo2 == null) {
+	    System.out.println("Como el arreglo de la derecha es null, solamente devolvemos "
+			       + "el arreglo de la izquierda.");
 	    return arreglo1;
 	}
 
 	while(iteradorDeArreglo1 <= longitudDeArreglo1 - 1
 	      && iteradorDeArreglo2 <= longitudDeArreglo2 - 1) {
+	    System.out.println("Como aún no hemos alcanzado a ninguno de los últimos elementos "
+			       + "de ambos arreglo");
 	    if(arreglo1[iteradorDeArreglo1].compareTo(arreglo2[iteradorDeArreglo2]) <= 0) {
+		System.out.println("Como " + arreglo1[iteradorDeArreglo1].toString( )
+				   + " es menor o igual que " + arreglo2[iteradorDeArreglo2].toString( ));
+		System.out.println("Agregamos a " + arreglo1[iteradorDeArreglo1].toString( )
+				   + " al arreglo resultante");
 		arregloResultante[iteradorDeArregloResultante] = arreglo1[iteradorDeArreglo1];
 		iteradorDeArreglo1++;
 		iteradorDeArregloResultante++;
 	    } else {
+		System.out.println("Como " + arreglo1[iteradorDeArreglo1].toString( ) + " es mayor que "
+				   + arreglo2[iteradorDeArreglo2].toString( ));
+		System.out.println("Agregamos a " + arreglo2[iteradorDeArreglo2].toString( )
+				   + " al arreglo resultante");
 		arregloResultante[iteradorDeArregloResultante] = arreglo2[iteradorDeArreglo2];
 		iteradorDeArreglo2++;
 		iteradorDeArregloResultante++;
@@ -119,11 +143,19 @@ public class Arreglo {
 	}
 
 	if(iteradorDeArreglo1 == longitudDeArreglo1) {
+	    System.out.println("Como el iterador de " + devuelveCadena(arreglo1)
+			       + " ya llegó a su último elemento, "
+			       + "agregamos los elementos faltantes de " + devuelveCadena(arreglo2)
+			       + " al arreglo resultante");
 	    for(int i = iteradorDeArregloResultante; i < longitudDeArreglo1 + longitudDeArreglo2; i++) {
 		arregloResultante[i] = arreglo2[iteradorDeArreglo2];
 		iteradorDeArreglo2++;
 	    }
 	} else if(iteradorDeArreglo2 == longitudDeArreglo2) {
+	    System.out.println("Como el iterador de " + devuelveCadena(arreglo2)
+			       + " ya llegó a su último elemento, "
+			       + "agregamos los elementos faltantes de " + devuelveCadena(arreglo1)
+			       + " al arreglo resultante.");
 	    for(int i = iteradorDeArregloResultante; i < longitudDeArreglo1 + longitudDeArreglo2; i++) {
 		arregloResultante[i] = arreglo1[iteradorDeArreglo1];
 		iteradorDeArreglo1++;
@@ -139,7 +171,7 @@ public class Arreglo {
 	Comparable[ ] segundaMitad;
 	int longitudDePrimeraMitad;
 	int longitudDeSegundaMitad;
-	Comparable[ ] arregloResultante;
+	Comparable[ ] arregloResultante;	
 
 	if(arreglo == null || longitudDeArreglo == 1) {
 	    return arreglo;
@@ -175,9 +207,17 @@ public class Arreglo {
 	    segundaMitad[i - longitudDePrimeraMitad] = arreglo[i];
 	}
 
+	System.out.println("El arreglo de la izquierda es: " + devuelveCadena(primeraMitad));
+	System.out.println("El arreglo de la derecha es: " + devuelveCadena(segundaMitad));
+
+	System.out.println("Aplicamos mergeSort a " + devuelveCadena(primeraMitad));
 	primeraMitad = Arreglo.mergeSort(primeraMitad);
+	System.out.println("Aplciamos mergeSort a " + devuelveCadena(segundaMitad));
 	segundaMitad = Arreglo.mergeSort(segundaMitad);
+	System.out.println("Mezclamos a los arreglos " + devuelveCadena(primeraMitad)
+			   + " y " + devuelveCadena(segundaMitad));
 	arregloResultante = Arreglo.mezcla(primeraMitad, segundaMitad);
+	System.out.println("Obtenemos " + devuelveCadena(arregloResultante));
 
 	return arregloResultante;
     }
