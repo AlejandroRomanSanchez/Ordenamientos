@@ -174,18 +174,9 @@ public class Arreglo {
 	Comparable[ ] arregloResultante;	
 
 	if(arreglo == null || longitudDeArreglo == 1) {
+	    System.out.println("Como " + devuelveCadena(arreglo) + " tiene un elemento o es null, "
+			       + "ya no le hacemos nada");
 	    return arreglo;
-	}
-
-	if(longitudDeArreglo == 2) {
-	    arregloResultante = new Comparable[2];
-	    
-	    if(arreglo[0].compareTo(arreglo[1]) <= 0) {
-		return arreglo;
-	    } else {
-		arregloResultante[0] = arreglo[1];
-		arregloResultante[1] = arreglo[0];
-	    }
 	}
 
 	if(longitudDeArreglo % 2 == 0) {
@@ -207,6 +198,7 @@ public class Arreglo {
 	    segundaMitad[i - longitudDePrimeraMitad] = arreglo[i];
 	}
 
+	System.out.println("Dividmos el arreglo " + devuelveCadena(arreglo) + " en dos partes");
 	System.out.println("El arreglo de la izquierda es: " + devuelveCadena(primeraMitad));
 	System.out.println("El arreglo de la derecha es: " + devuelveCadena(segundaMitad));
 
