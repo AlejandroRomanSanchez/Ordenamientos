@@ -216,12 +216,29 @@ public class Arreglo {
 
     public static <T extends Comparable<T>> T[ ] heapSort(T[ ] arreglo) throws Exception {
 	int cardinalidadDelArreglo = arreglo.length;
+	System.out.println("Procesaremos al arreglo " + Arreglo.devuelveCadena(arreglo)
+			   + ", pero el max-heap ahora solamente tendrá los primeros "
+			   + arreglo.length + " elementos");
 	MaxHeap<T> maxHeap = new MaxHeap<>(arreglo, cardinalidadDelArreglo);
+	System.out.println("Con los primeros " + arreglo.length + " de este arreglo "
+			   + "construimos un max-heap.");
 	maxHeap.construyeUnMaxHeap(cardinalidadDelArreglo);
+	System.out.println("El arreglo actual es: " + Arreglo.devuelveCadena(maxHeap.maxHeap));
 
+	System.out.println("Recorremos el arreglo de derecha a izquierda, sin contar al primer"
+			   + " elemento");
 	for(int i = cardinalidadDelArreglo - 1; 1 <= i; i--) {
+	    System.out.println("Estamos en elemento de índice " + i);
+	    System.out.println("Intercambiamos el primer elemento con el elemento cuyo índice es "
+			       + i);
 	    Arreglo.intercambia(maxHeap.maxHeap, 0, i);
+	    System.out.println("El estado actual del arreglo es: " + Arreglo.devuelveCadena(maxHeap.maxHeap));
 	    maxHeap.cardinalidadDelMaxHeap = maxHeap.cardinalidadDelMaxHeap - 1;
+	    System.out.println("En la siguiente iteración, al max-heap solamente le consideramos los primeros"
+			       + " " + maxHeap.getCardinalidadDelMaxHeap( ) + "elementos del arreglo");
+	    System.out.println("Restauramos la propiedad de max-heap para los primeros "
+			       + maxHeap.getCardinalidadDelMaxHeap( )
+			       + " elementos del arreglo, desde la raíz");
 	    maxHeap.maxHeapificaAlNodoEn(0);
 	}
 
