@@ -57,7 +57,8 @@ public class MaxHeap<T extends Comparable<T>> {
 	System.out.println("Recorremos todos los nodos que no son hojas del max-heap, "
 			   + " o dicho de otro modo, recorremos el arreglo de derecha a"
 			   + " izquierda, desde el piso de la mitad de "
-			   + this.getCardinalidadDelMaxHeap( ) + " hasta el índice cero");
+			   + this.getCardinalidadDelMaxHeap( ) 
+			   + " menos una unidad hasta el índice cero");
 	for(int i = cardinalidadDelMaxHeap/ 2 - 1; 0 <= i; i--) {
 	    System.out.println("En el índice " + i + ", procedemos a conservar la propiedad"
 			       + " de max-heap al nodo de índice " + i + " junto con sus dos"
