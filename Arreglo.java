@@ -213,6 +213,20 @@ public class Arreglo {
 
 	return arregloResultante;
     }
+
+    public static <T extends Comparable<T>> T[ ] heapSort(T[ ] arreglo) throws Exception {
+	int cardinalidadDelArreglo = arreglo.length;
+	MaxHeap<T> maxHeap = new MaxHeap<>(arreglo, cardinalidadDelArreglo);
+	maxHeap.construyeUnMaxHeap(cardinalidadDelArreglo);
+
+	for(int i = cardinalidadDelArreglo - 1; 1 <= i; i--) {
+	    Arreglo.intercambia(maxHeap.maxHeap, 0, i);
+	    maxHeap.cardinalidadDelMaxHeap = maxHeap.cardinalidadDelMaxHeap - 1;
+	    maxHeap.maxHeapificaAlNodoEn(0);
+	}
+
+	return maxHeap.maxHeap;
+    }
     
     public static void main(String[ ] args) throws Exception {
 	Integer[ ] arregloEnteros = {5, 12, 22, 3, 55, 8, 3, 10};
@@ -231,5 +245,11 @@ public class Arreglo {
 	Integer[ ] arregloEnteros2 = {5, 12, 22, 3, 55, 8, 3, 10};
 	Arreglo.imprime(arregloEnteros2);
 	Arreglo.imprime(Arreglo.mergeSort(arregloEnteros2));
+
+	System.out.println("\nPruebas para heapSort( ): ");
+	Integer[ ] arregloEnteros3 = {5, 12, 22, 3, 55};
+	Arreglo.imprime(arregloEnteros3);
+	Integer[ ] arregloResultante = Arreglo.heapSort(arregloEnteros3);
+	Arreglo.imprime(arregloResultante);
     }
 }
